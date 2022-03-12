@@ -1,4 +1,3 @@
-import imp
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from users.models import User
@@ -8,5 +7,14 @@ from users.models import User
 
 @admin.register(User)
 class MyUserAdmin(UserAdmin):
+
+    fieldsets = UserAdmin.fieldsets + (
+        (
+            "Advanced options",
+            {
+                "fields": ("company_code",),
+            },
+        ),
+    )
 
     list_display = ("username", "company_code")

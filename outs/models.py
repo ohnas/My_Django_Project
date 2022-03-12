@@ -1,16 +1,13 @@
 from django.db import models
 from core.models import TimeStampeModel
+from products.models import Product
 from users.models import User
-
 
 # Create your models here.
 
 
-class Product(TimeStampeModel):
+class Out(TimeStampeModel):
 
-    name = models.CharField(max_length=250)
+    name = models.ForeignKey(Product, on_delete=models.SET_NULL, blank=True, null=True)
     quantity = models.IntegerField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
